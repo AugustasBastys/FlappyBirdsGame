@@ -7,9 +7,9 @@ import java.awt.Rectangle;
 import javax.swing.JPanel;
 
 import constants.Constants;
+import controllers.PipeController;
 import gameObjects.Bird;
 import gameObjects.Pipe;
-import gameObjects.PipeController;
 
 public class Painter extends JPanel {
 

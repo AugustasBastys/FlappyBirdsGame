@@ -1,10 +1,12 @@
-package gameObjects;
+package controllers;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Random;
 
 import constants.*;
+import gameObjects.Pipe;
+
 import javax.swing.SpringLayout.Constraints;
 
 public class PipeController {

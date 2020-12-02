@@ -3,10 +3,10 @@ package rules;
 import java.awt.Rectangle;
 
 import constants.Constants;
+import controllers.PipeController;
 import gameObjects.Bird;
 import gameObjects.GameObject;
 import gameObjects.Pipe;
-import gameObjects.PipeController;
 
 public class Rules {
 
