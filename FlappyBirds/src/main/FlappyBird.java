@@ -11,10 +11,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 
-public class FlappyBird implements ActionListener{
+import constants.Constants;
+import gameObjects.GameObject;
+
+public class FlappyBird extends JPanel implements ActionListener{
 	
 	Renderer renderer;
 	Rectangle bird;
@@ -32,9 +36,7 @@ public class FlappyBird implements ActionListener{
 	public final int SCREEN_HEIGHT = 800;
 	public final int GROUND_HEIGHT = 150;
 	
-	int ticks;
 	int birdYMotion = 9;
-	private boolean gameOver = false;
 	
 	
 	public void setRenderer(Renderer renderer) {
@@ -44,9 +46,10 @@ public class FlappyBird implements ActionListener{
 	
 	public void setEverything() {
 		JFrame jframe = new JFrame();
-		Timer timer = new Timer(45, this);
+		Timer timer = new Timer(Constants.GAME_SPEED, this);
 
-		jframe.add(renderer);
+//		jframe.add(renderer);
+		jframe.add(this);
 		jframe.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		jframe.setTitle("FLAPPY BIRDS!!!");
 		jframe.setResizable(false);
@@ -71,7 +74,8 @@ public class FlappyBird implements ActionListener{
 		int width = 100;
 		int height = 100 + random.nextInt(250);
 		
-	
+
+		
 		if (atStart) {
 			pipes.add(new Rectangle(SCREEN_WIDTH + width + pipes.size() * distanceBetweenFirstAndSecondPipe, SCREEN_HEIGHT - height - GROUND_HEIGHT,
 					width, height));
@@ -121,17 +125,50 @@ public class FlappyBird implements ActionListener{
 		
 	}
 
-	 
+	@Override
+	public void paintComponent(Graphics g) {
+		repaint(g);
+		/*
+		g.setColor(Color.PINK);
+		g.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+		g.setColor(Color.yellow);
+		g.fillOval(150, 150, 90, 90);
+		
+		g.setColor(Color.LIGHT_GRAY.brighter());
+		g.fillOval(230, 200, 50, 25);
+		g.fillOval(250, 202, 50, 25);
+		g.fillOval(270, 204, 50, 25);
+		
+		g.fillOval(125, 200, 50, 25);
+		g.fillOval(145, 202, 50, 25);
+		g.fillOval(165, 204, 50, 25);
+
+
+		
+		g.setColor(Color.green);
+		g.fillRect(0, SCREEN_HEIGHT - GROUND_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - GROUND_HEIGHT);
+
+		
+		g.setColor(Color.blue);
+		g.fillRect(bird.x, bird.y, bird.width, bird.height);
+		
+		for(Rectangle rect: pipes) {
+			paintPipe(g,rect);
+		}
+		
+		*/
+	} 
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+			
 
 		int pipeSpeed = 12;
-		KeyEvent b = null;
 		controls.setBird(bird);
 		
-		for (int i = 0; i < pipes.size(); i++) {
-			pipes.get(i).x -= pipeSpeed;
+		for(Rectangle p : pipes) {
+			p.x -= pipeSpeed;
 		}
 		
 
@@ -148,23 +185,44 @@ public class FlappyBird implements ActionListener{
 		
 		bird.y += birdYMotion;
 		
-		
+//		 rectangle.intersects(bird)
 		for (Rectangle rectangle : pipes) {
-			if(rectangle.intersects(bird)) {
-				gameOver = true;
+			if(intersects(rectangle, bird)) {
 				System.exit(0);
 			}
 		}
 		
 		if(bird.y < 0 || bird.y > SCREEN_HEIGHT - GROUND_HEIGHT) {
-			gameOver = true;
 			System.exit(0);
 		}
 		
-		renderer.repaint();
-		
+		Graphics g = null;
+
+		//		renderer.repaint();
+		repaint();
 	}
 
-	
+	 private boolean intersects(Rectangle pipe, Rectangle bird) {
+
+	     // Left x
+	     int leftX = (int) Math.max(pipe.getX(), bird.getX());
+
+	     // Right x
+	     int rightX = (int) Math.min(pipe.getX() + pipe.getWidth(), 
+	    		 bird.getX() + bird.getWidth());
+
+	     // TopY
+	     int topY = (int) Math.max(pipe.getY(),bird.getY());
+
+	     // Bottom y
+	     int botY =  (int) Math.min(pipe.getY() + pipe.getHeight(),
+	    		 bird.getY() + bird.getHeight());
+
+	     if ((rightX > leftX) && (botY > topY)) {
+	         return true;
+	     }
+
+	     return false;
+	 }
 
 }

@@ -1,24 +1,23 @@
-package main;
+package controls;
 
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import constants.Constants;
 import gameObjects.Bird;
 
 
 public class Controls implements KeyListener {
 
-	Rectangle bird;
+	Bird bird;
 
-	public Controls() {
-	}
 
-	public Rectangle getBird() {
+	public Bird getBird() {
 		return bird;
 	}
 
-	public void setBird(Rectangle bird) {
+	public void setBird(Bird bird) {
 		this.bird = bird;
 	}
 
@@ -26,21 +25,19 @@ public class Controls implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		
-		int birdJumpsBy = 50;
-		
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			bird.y -= birdJumpsBy;
+			int setNewY = bird.getY() - Constants.BIRD_JUMPS;
+			bird.setY(setNewY);
 		}
 		
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-	
+	// not used
 	}
 	@Override
-	public void keyReleased(KeyEvent e)
-	{
-		
+	public void keyReleased(KeyEvent e) {
+		// not used
 	}
 }
