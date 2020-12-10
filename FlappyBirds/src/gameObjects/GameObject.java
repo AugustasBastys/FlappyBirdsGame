@@ -1,13 +1,16 @@
 package gameObjects;
 
+import move.Moves;
+
 public abstract class GameObject {
 
 	protected int x;
 	protected int y;
 	protected int width;
 	protected int height;
+	 
 	
-	public abstract void moveObject(int value);
+	public Moves moves;
 	
 	public int getX() {
 		return x;
@@ -35,5 +38,12 @@ public abstract class GameObject {
 	}
 	
 	
+	public void move(int movingValue) {
+		moves.move(movingValue, this);
+	}
+	
+	public void setMove(Moves moves) {
+		this.moves = moves;
+	}
 	
 }

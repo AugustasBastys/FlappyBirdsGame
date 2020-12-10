@@ -11,9 +11,4 @@ public class Bird extends GameObject {
 		return instance;
 	}
 
-	@Override
-	public void moveObject(int value) {
-		this.y += value;
-	}
-
-}
+ }

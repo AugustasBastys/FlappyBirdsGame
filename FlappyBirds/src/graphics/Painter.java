@@ -16,6 +16,11 @@ public class Painter extends JPanel {
 	private PipeController pipes;
 	private Bird bird;
 	
+	public Painter(Bird bird, PipeController pipes) {
+		this.pipes = pipes;
+		this.bird = bird;
+	}
+
 	private void paintPipe(Graphics g, Pipe pipe) {
 		g.setColor(Color.green.darker());
 		g.fillRect(pipe.getX(), pipe.getY(), pipe.getWidth(), pipe.getHeight());
@@ -31,25 +36,34 @@ public class Painter extends JPanel {
 		g.fillRect(0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 	}
 	
+	private void paintSun(Graphics g) {
+		g.setColor(Color.yellow);
+		g.fillOval(150, 150, 90, 90);
+		
+	}
+	
+	
 	private void paintGround(Graphics g) {
-		g.setColor(Color.green);
-		g.fillRect(Constants.SCREEN_WIDTH - Constants.SCREEN_WIDTH,
+		
+		g.setColor(Color.GREEN);
+		g.fillRect(0,
 				Constants.SCREEN_HEIGHT - Constants.GROUND_HEIGHT,
 				Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT - Constants.GROUND_HEIGHT);
 	}
 	
 	public void repaint(Graphics g) {
 		
-		paintGround(g);
-		
 		paintSky(g);
+			
+		paintSun(g);
+	
+		paintGround(g);
 		
 		paintBird(g, bird);
 		
 		for(Pipe p: pipes.getPipes()) {
 			paintPipe(g,p);
 		}
-		
 	}
 	
 	@Override
