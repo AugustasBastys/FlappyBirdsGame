@@ -13,8 +13,8 @@ import gameObjects.Pipe;
 
 public class Painter extends JPanel {
 
-	PipeController pipes;
-	Bird bird;
+	private PipeController pipes;
+	private Bird bird;
 	
 	private void paintPipe(Graphics g, Pipe pipe) {
 		g.setColor(Color.green.darker());

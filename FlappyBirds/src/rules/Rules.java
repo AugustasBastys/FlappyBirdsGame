@@ -10,9 +10,15 @@ import gameObjects.Pipe;
 
 public class Rules {
 
-	Bird bird;
-	PipeController pipes;
+	private Bird bird;
+	private PipeController pipes;
 	
+	public Rules(Bird bird, PipeController pipes) {
+		super();
+		this.bird = bird;
+		this.pipes = pipes;
+	}
+
 	public void checkRules() {
 		
 		for (Pipe p : pipes.getPipes()) {
@@ -21,9 +27,7 @@ public class Rules {
 			}
 		}
 		
-		if(bird.getY() < 0 || bird.getY() > Constants.SCREEN_HEIGHT - Constants.GROUND_HEIGHT) {
-			System.exit(0);
-		}
+		BirdIsNotInBounds(bird);
 	}
 	
 	 private boolean intersects(GameObject pipe, GameObject bird) {
@@ -45,6 +49,10 @@ public class Rules {
 	     return false;
 	 }
 	
-	
+	private void BirdIsNotInBounds(GameObject bird) {
+		if(bird.getY() < 0 || bird.getY() > Constants.SCREEN_HEIGHT - Constants.GROUND_HEIGHT) {
+			System.exit(0);
+		}
+	}
 	
 }

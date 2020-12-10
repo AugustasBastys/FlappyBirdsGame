@@ -10,7 +10,7 @@ import gameObjects.Bird;
 
 public class Controls implements KeyListener {
 
-	Bird bird;
+	private Bird bird;
 
 
 	public Bird getBird() {

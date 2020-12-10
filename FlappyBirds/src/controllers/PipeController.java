@@ -12,7 +12,7 @@ import javax.swing.SpringLayout.Constraints;
 public class PipeController {
 
 	private ArrayList<Pipe> pipes;
-	Random random;
+	private Random random;
 
 	public PipeController() {
 		this.pipes = new ArrayList<>();
