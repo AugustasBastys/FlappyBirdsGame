@@ -27,10 +27,12 @@ public class Rules {
 			}
 		}
 		
-		BirdIsNotInBounds(bird);
+		if(birdIsNotInBounds(bird)) {
+			System.exit(0);
+		}
 	}
 	
-	 private boolean intersects(GameObject pipe, GameObject bird) {
+	 public boolean intersects(GameObject pipe, GameObject bird) {
 
 	     int leftX = Math.max(pipe.getX(), bird.getX());
 
@@ -49,10 +51,11 @@ public class Rules {
 	     return false;
 	 }
 	
-	private void BirdIsNotInBounds(GameObject bird) {
+	public boolean birdIsNotInBounds(GameObject bird) {
 		if(bird.getY() < 0 || bird.getY() > Constants.SCREEN_HEIGHT - Constants.GROUND_HEIGHT) {
-			System.exit(0);
+			return true;
 		}
+		return false;
 	}
 	
 }

@@ -8,7 +8,6 @@ public abstract class GameObject {
 	protected int y;
 	protected int width;
 	protected int height;
-	 
 	
 	public Moves moves;
 	

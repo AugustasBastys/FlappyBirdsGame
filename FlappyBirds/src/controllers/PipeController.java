@@ -53,14 +53,18 @@ public class PipeController {
 
 			if (tempPipe.getX() + tempPipe.getWidth() < 0) {
 				pipes.remove(tempPipe);
-				if(pipes.size()<6) {
-					addPipe(Constants.PIPE_WIDTH, Constants.PIPE_HEIGHT, false);
-				}
+				isPipeSizeLowerThan();
  			}
 		}
 		
 	}
 
+	public void isPipeSizeLowerThan() {
+		if(pipes.size()<6) {
+			addPipe(Constants.PIPE_WIDTH, Constants.PIPE_HEIGHT, false);
+		}
+	}
+	
 	public ArrayList<Pipe> getPipes() {
 		return pipes;
 	}
